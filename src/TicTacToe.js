@@ -1,5 +1,5 @@
 // src/TicTacToe.js
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './TicTacToe.css';
 
@@ -10,23 +10,30 @@ const TicTacToe = () => {
   const [message, setMessage] = useState('Your turn!');
   const navigate = useNavigate();
 
-  const winningCombinations = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
+  // Memoize winningCombinations to ensure it's stable
+  const winningCombinations = useMemo(
+    () => [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ],
+    []
+  );
 
   // Memoize the checkWinner function to ensure it remains stable
-  const checkWinner = useCallback((board, player) => {
-    return winningCombinations.some((combination) =>
-      combination.every((index) => board[index] === player)
-    );
-  }, [winningCombinations]);
+  const checkWinner = useCallback(
+    (board, player) => {
+      return winningCombinations.some((combination) =>
+        combination.every((index) => board[index] === player)
+      );
+    },
+    [winningCombinations]
+  );
 
   // Memoize the aiMove function to ensure it is stable between renders
   const aiMove = useCallback(() => {
