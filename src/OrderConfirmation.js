@@ -1,6 +1,6 @@
 // src/OrderConfirmation.js
 import React from 'react';
-import './OrderConfirmation.css'; // Add this CSS file with horrible styles
+import './OrderConfirmation.css'; // Ensure this CSS file contains necessary styles
 
 const OrderConfirmation = () => {
   return (
@@ -10,9 +10,9 @@ const OrderConfirmation = () => {
         YOUR ORDER <span className="highlighted-text">IS ON THE WAY!</span>
       </p>
       <div className="content">
-        <marquee behavior="scroll" direction="left" scrollamount="20" className="marquee">
+        <div className="scrolling-text">
           🚚 Your patience will be rewarded! 🚚
-        </marquee>
+        </div>
         <p className="blinking-text">Redirecting in 10 seconds... if not, just wait longer!</p>
         <img
           src="https://via.placeholder.com/150"

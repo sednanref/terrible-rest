@@ -47,7 +47,7 @@ const TicTacToe = () => {
         setMessage('Your turn!');
       }
     }
-  }, [board, gameCount]);
+  }, [board, gameCount, checkWinner]);
 
   useEffect(() => {
     if (!isPlayerTurn && board.includes(null)) {

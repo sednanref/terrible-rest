@@ -10,6 +10,23 @@
   animation: backgroundFlash 1s infinite; /* Flashing background for extra discomfort */
 }
 
+.scrolling-text {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+  animation: scroll 10s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 @keyframes backgroundFlash {
   0% {
     background-color: #ff00ff;
