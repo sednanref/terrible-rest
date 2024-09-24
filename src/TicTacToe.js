@@ -21,6 +21,13 @@ const TicTacToe = () => {
     [2, 4, 6],
   ];
 
+  // Memoize the checkWinner function to ensure it remains stable
+  const checkWinner = useCallback((board, player) => {
+    return winningCombinations.some((combination) =>
+      combination.every((index) => board[index] === player)
+    );
+  }, [winningCombinations]);
+
   // Memoize the aiMove function to ensure it is stable between renders
   const aiMove = useCallback(() => {
     let move;
@@ -91,12 +98,6 @@ const TicTacToe = () => {
       setIsPlayerTurn(false);
       setMessage('AI’s turn...');
     }
-  };
-
-  const checkWinner = (board, player) => {
-    return winningCombinations.some((combination) =>
-      combination.every((index) => board[index] === player)
-    );
   };
 
   // Refactored resetGame function
