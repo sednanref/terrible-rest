@@ -1,0 +1,44 @@
+/* src/Confirmation.css */
+.confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  position: relative;
+  overflow: hidden; /* Prevent the page from enlarging */
+}
+
+.confirmation-message {
+  margin-top: 20px;
+  position: relative;
+}
+
+.confirmation-buttons {
+  margin-top: 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Add space between buttons */
+}
+
+.confirmation-buttons button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: left 0.2s, top 0.2s; /* Smooth movement */
+}
+
+.yes-button {
+  background-color: #f44336; /* Red color for YES button */
+  color: white;
+  transform: translate(-50%, -50%); /* Center horizontally */
+}
+
+.no-button {
+  background-color: #4caf50; /* Green color for NO button */
+  color: white;
+}
