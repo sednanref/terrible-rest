@@ -1,5 +1,5 @@
 // src/TicTacToe.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './TicTacToe.css';
 
@@ -21,13 +21,8 @@ const TicTacToe = () => {
     [2, 4, 6],
   ];
 
-  useEffect(() => {
-    if (!isPlayerTurn && board.includes(null)) {
-      aiMove();
-    }
-  }, [isPlayerTurn]);
-
-  const aiMove = () => {
+  // Memoize the aiMove function to ensure it is stable between renders
+  const aiMove = useCallback(() => {
     let move;
     if (gameCount < 3) {
       // AI strategy to prevent losing in the first two games
@@ -52,7 +47,13 @@ const TicTacToe = () => {
         setMessage('Your turn!');
       }
     }
-  };
+  }, [board, gameCount]);
+
+  useEffect(() => {
+    if (!isPlayerTurn && board.includes(null)) {
+      aiMove();
+    }
+  }, [isPlayerTurn, aiMove, board]);
 
   const findCornerFirstMove = (board) => {
     const corners = [0, 2, 6, 8];
@@ -67,7 +68,9 @@ const TicTacToe = () => {
   };
 
   const findRandomMove = (board) => {
-    const availableMoves = board.map((cell, index) => (cell === null ? index : null)).filter((index) => index !== null);
+    const availableMoves = board
+      .map((cell, index) => (cell === null ? index : null))
+      .filter((index) => index !== null);
     return availableMoves[Math.floor(Math.random() * availableMoves.length)];
   };
 
@@ -95,13 +98,6 @@ const TicTacToe = () => {
       combination.every((index) => board[index] === player)
     );
   };
-
-  // Adjust the useEffect to handle AI moves after state updates
-  useEffect(() => {
-    if (!isPlayerTurn && board.includes(null) && message === 'New game! AI starts.') {
-      aiMove();
-    }
-  }, [board, isPlayerTurn, message]);
 
   // Refactored resetGame function
   const resetGame = () => {

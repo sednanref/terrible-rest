@@ -1,5 +1,5 @@
 // src/Confirmation.js
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Dish from './Dish';
 import './Confirmation.css';
@@ -10,13 +10,13 @@ const Confirmation = ({ dishes }) => {
   const [randomDish, setRandomDish] = useState(null);
   const [buttonPosition, setButtonPosition] = useState({ top: '50%', left: '50%' });
 
-  // Define boundaries within which the button can move
-  const movementArea = {
-    top: 100, // Minimum top boundary (px)
-    left: 100, // Minimum left boundary (px)
-    right: window.innerWidth - 700, // Maximum right boundary (px)
-    bottom: 200, // Restrict the bottom boundary to a small amount (px)
-  };
+  // Memoize movementArea to prevent it from being redefined on every render
+  const movementArea = useMemo(() => ({
+    top: 100,
+    left: 100,
+    right: window.innerWidth - 700,
+    bottom: 200,
+  }), []);
 
   useEffect(() => {
     const randomIndex = Math.floor(Math.random() * dishes.length);
@@ -52,7 +52,7 @@ const Confirmation = ({ dishes }) => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [movementArea]);
+  }, [movementArea]); // movementArea is now stable due to useMemo
 
   if (!randomDish) return null; // Wait until randomDish is set
 
