@@ -14,22 +14,22 @@ const dishes = [
   {
     name: 'Spaghetti Carbonara',
     description: 'A classic Italian pasta dish made with eggs, cheese, pancetta, and pepper.',
-    image: '/images/spaghetti-carbonara.jpg', // Place the image in the public/images directory
+    image: process.env.PUBLIC_URL + '/images/spaghetti-carbonara.jpg', // Place the image in the public/images directory
   },
   {
     name: 'Margherita Pizza',
     description: 'A simple pizza with fresh tomatoes, mozzarella cheese, and basil.',
-    image: '/images/margherita-pizza.jpg',
+    image: process.env.PUBLIC_URL + '/images/margherita-pizza.jpg',
   },
   {
     name: 'Caesar Salad',
     description: 'A fresh salad with romaine lettuce, croutons, Parmesan cheese, and Caesar dressing.',
-    image: '/images/caesar-salad.jpg',
+    image: process.env.PUBLIC_URL + '/images/caesar-salad.jpg',
   },
   {
     name: 'Chocolate Lava Cake',
     description: 'A rich chocolate cake with a gooey, molten center.',
-    image: '/images/chocolate-lava-cake.jpg',
+    image: process.env.PUBLIC_URL + '/images/chocolate-lava-cake.jpg',
   },
 ];
 
@@ -51,7 +51,7 @@ const rotatedImages = [
 
 function App() {
   return (
-    <Router>
+    <Router basename="/terrible-rest">
       <div className="App">
         <Navbar />
         <Routes>

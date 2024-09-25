@@ -1,6 +1,7 @@
 // src/UserInfo.js
 import React, { useState } from 'react';
-import './UserInfo.css'; // Ensure the CSS breaks all usability rules
+import './UserInfo.css';
+import { useNavigate } from 'react-router-dom';
 
 const UserInfo = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,9 @@ const UserInfo = () => {
     phone: '',
   });
 
+  const navigate = useNavigate(); // useNavigate hook for navigation
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -18,7 +22,7 @@ const UserInfo = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert('Order submitted successfully! Please do not refresh.');
-    window.location.href = '/order-confirmation';
+    navigate('/order-confirmation'); // Navigate correctly using useNavigate
   };
 
   return (
